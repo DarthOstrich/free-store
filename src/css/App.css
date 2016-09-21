@@ -12,7 +12,10 @@ header {
 }
 
 main {
+  display: flex;
+  flex-direction: column;
   padding: 10px;
+  align-items: center;
 }
 
 h1 {
@@ -32,23 +35,40 @@ button {
   color: #ecf0f1;
 }
 
-form {
+.entry-form {
+  /*display: flex;*/
+  /*flex-basis: 100%;*/
+}
+
+.new-entry-form {
+  padding: 20px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /*width: 800px;*/
+  /*flex-basis: 500px;*/
+  justify-content: flex-end;
+  align-items: flex-end;
   flex-direction: column;
+  background-color: #fff;
+}
+
+.new-entry-form button {
+  align-self: stretch;
 }
 
 .form-row {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
+  align-self: stretch;
 }
 
-input {
+.form-row label {
+  width: 100%;
+}
+
+.form-row input {
+  width: 100%;
   border-radius: 2px;
   border: 1px solid #e0e0e0;
   padding: 5px;
+  margin-bottom: 10px;
 }
 
 .required {

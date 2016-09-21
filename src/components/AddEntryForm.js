@@ -27,20 +27,20 @@ class AddEntryForm extends Component {
 	}
 	render(){
 		return (
-				<form ref="entryForm" onSubmit={this.handleSubmit.bind(this)}>
+				<form ref="entryForm" className="new-entry-form" onSubmit={this.handleSubmit.bind(this)}>
 					<div className="form-row">
 						<label htmlFor="title">Name of the Job <span className="required">(required)</span></label>
-						<input type="text" ref="title" name="title" placeholder="example: Website for Vandalay Industries"/>
+						<input type="text" ref="title" name="title" placeholder="example: Website for Vandalay Industries" required/>
 					</div>
 					<div className="form-row">
 						<label htmlFor="date">Date <span className="required">(required)</span></label>
-						<input type="date" ref="date" name="date"/>
+						<input type="date" ref="date" name="date" required/>
 					</div>
 					<div className="form-row">
 						<label htmlFor="amount">How much did you make? <span className="required">(required)</span></label>
-						<input type="text" ref="amount" name="amount" placeholder="100.10"/>
+						<input type="text" ref="amount" name="amount" placeholder="100.10" required/>
 					</div>
-					<button type="submit">Submit</button>
+					<button type="submit">Add Entry</button>
 				</form>
 		);
 	}

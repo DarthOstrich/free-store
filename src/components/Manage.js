@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 // import autobind from 'autobind-decorator';
 import update from 'react-addons-update';
 import AddEntryForm from './AddEntryForm.js';
+
+// import Firebase stuff
+import Rebase from 're-base';
+var base = Rebase.createClass({
+  	  apiKey: "AIzaSyBdsPVoPIkaN_poNEGcEU71GiBupw049U4",
+      authDomain: "not-quicken.firebaseapp.com",
+      databaseURL: "https://not-quicken.firebaseio.com/",
+      storageBucket: "not-quicken.appspot.com",
+});
 /*-------------------------------------
 | Render the <Manage/>  component
 -------------------------------------*/
@@ -11,28 +20,24 @@ class Manage extends Component {
 		super();
 		//Set the initial state to look for entries
 		this.state = {
-			entries : {
-				0 : {
-					id : 'id1',
-					title : 'test title 1',
-					date : '2016-09-02',
-					amount : '100'
-				},
-				1 : {
-					id : 'id2',
-					title : 'test title 2',
-					date : '2015-09-15',
-					amount : '1000'
-				},
-				2 : {
-					id : 'id3',
-					title : 'test title 3',
-					date : '2015-02-11',
-					amount : '1000000'
-				}
-			}
+			entries : {}
+			// entries : {
+			// 	0 : {
+			// 		id : 'id1',
+			// 		title : 'test title 1',
+			// 		date : '2016-09-02',
+			// 		amount : '100'
+			// 	}
+			// }
 		}
 		this.addEntry = this.addEntry.bind(this);
+	}
+	//link the app with firebase
+	componentDidMount(){
+		base.syncState(this.props.params + '/entries', {
+			context : this,
+			state : 'entries'
+		})
 	}
 	addEntry(entry){
 		console.log('from addEntry', entry);
@@ -45,6 +50,15 @@ class Manage extends Component {
 		this.setState({
 			entries: update(this.state.entries, {[key]: {$set: entry}})
 		})
+	}
+	removeEntry(key){
+		console.log(this);
+		if(confirm("Are you sure you want to delete this entry?")){
+			this.state.entries[key] = null;
+			this.setState({
+				entries : this.state.entries
+			});
+		}
 	}
 	handleChange(key, event){
 		let thisName = event.target.name;
@@ -63,7 +77,7 @@ class Manage extends Component {
 		// console.log('from renderEntries', this.state.entries[key]);
 		let thisEntry = this.state.entries[key];
 		return (
-			<div className="entry-list-item">
+			<div className="entry-list-item" key={key}>
 				<li>
 					{/* change this to a list of the entries, with an arrow that opens up the field */}
 					<span>
@@ -79,18 +93,19 @@ class Manage extends Component {
 
 					</span>
 				</li>
-				<span className="form-block" key={key}>
+				<span className="form-block">
 					<label htmlFor="title">Title</label>
-					<input type="text" ref="title" name="title" value={thisEntry.title}  onChange={this.handleChange.bind(this, key)} />
-					</span>
-					<span className="form-block">
-					<label htmlFor="date">Date</label>
-					<input type="date" ref="date" name="date" value={thisEntry.date}  onChange={this.handleChange.bind(this)}/>
-					</span>
-					<span className="form-block">
-					<label htmlFor="amount">Amount $</label>
-					<input type="text" ref="amount" name="amount" value={thisEntry.amount}  onChange={this.handleChange.bind(this)}/>
+					<input type="text" ref="title" name="title" value={thisEntry.title}  onChange={this.handleChange.bind(this, key)} required/>
 				</span>
+				<span className="form-block">
+					<label htmlFor="date">Date</label>
+					<input type="date" ref="date" name="date" value={thisEntry.date}  onChange={this.handleChange.bind(this)} required/>
+				</span>
+				<span className="form-block">
+					<label htmlFor="amount">Amount $</label>
+					<input type="text" ref="amount" name="amount" value={thisEntry.amount}  onChange={this.handleChange.bind(this)} required/>
+				</span>
+				<button onClick={this.removeEntry.bind(this, key)}>Remove Entry</button>
 			</div>
 		)
 	}

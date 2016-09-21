@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import Login from './Login.js';
-// import logo from '../logo.svg';
+import {Router, Route} from 'react-router';
+
 
 /*-------------------------------------
 | Import Components
 -------------------------------------*/
+import Login from './Login.js';
 import Manage from './Manage';
 import 'normalize.css';
 import '../css/App.css';
@@ -22,5 +23,13 @@ class App extends Component {
     );
   }
 }
+
+// Routes
+var routes = (
+	<Router>
+		<Route path="/" component={Login}/>
+		<Route path="/manage" component={App}/>
+	</Router>
+)
 
 export default App;
