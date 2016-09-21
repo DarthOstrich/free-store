@@ -52,11 +52,11 @@ class Manage extends Component {
 		})
 	}
 	removeEntry(key){
-		console.log(this);
+		// 1. Confirm that the user wants to delete the entry
 		if(confirm("Are you sure you want to delete this entry?")){
-			this.state.entries[key] = null;
+			// 2. if yes, delete entry
 			this.setState({
-				entries : this.state.entries
+				entries: update(this.state.entries, {[key]: {$set: null}})
 			});
 		}
 	}
