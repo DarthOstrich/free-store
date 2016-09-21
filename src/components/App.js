@@ -24,12 +24,4 @@ class App extends Component {
   }
 }
 
-// Routes
-var routes = (
-	<Router>
-		<Route path="/" component={Login}/>
-		<Route path="/manage" component={App}/>
-	</Router>
-)
-
 export default App;

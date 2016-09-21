@@ -21,6 +21,7 @@ class Manage extends Component {
 		//Set the initial state to look for entries
 		this.state = {
 			entries : {}
+			// example of the entries object
 			// entries : {
 			// 	0 : {
 			// 		id : 'id1',
@@ -40,12 +41,10 @@ class Manage extends Component {
 		})
 	}
 	addEntry(entry){
-		console.log('from addEntry', entry);
-		console.log('from addEntry', this.state.entries);
+		// console.log('from addEntry', entry);
+		// console.log('from addEntry', this.state.entries);
 		// create a timestamp
 		let key = 'entry-'+(new Date()).getTime();
-		// update the state object
-		// this.state.entries['entry-' + timestamp] = entry;
 		// set the state
 		this.setState({
 			entries: update(this.state.entries, {[key]: {$set: entry}})
@@ -78,31 +77,30 @@ class Manage extends Component {
 		let thisEntry = this.state.entries[key];
 		return (
 			<div className="entry-list-item" key={key}>
+				<h4>Summary</h4>
 				<li>
 					{/* change this to a list of the entries, with an arrow that opens up the field */}
-					<span>
-					{thisEntry.title}
-
-					</span>
-					<span>
-					{thisEntry.date}
-
-					</span>
-					<span>
-					{thisEntry.amount}
-
-					</span>
+					<div>
+						<p><strong>Title:</strong> {thisEntry.title} </p>
+					</div>
+					<div>
+						<p><strong>Date:</strong> {thisEntry.date} </p>
+					</div>
+					<div>
+						<p><strong>Amount:</strong> ${thisEntry.amount}</p>
+					</div>
 				</li>
+				<h4>Edit</h4>
 				<span className="form-block">
-					<label htmlFor="title">Title</label>
+					<label htmlFor="title">Title: </label>
 					<input type="text" ref="title" name="title" value={thisEntry.title}  onChange={this.handleChange.bind(this, key)} required/>
 				</span>
 				<span className="form-block">
-					<label htmlFor="date">Date</label>
+					<label htmlFor="date">Date: </label>
 					<input type="date" ref="date" name="date" value={thisEntry.date}  onChange={this.handleChange.bind(this)} required/>
 				</span>
 				<span className="form-block">
-					<label htmlFor="amount">Amount $</label>
+					<label htmlFor="amount">Amount: $</label>
 					<input type="text" ref="amount" name="amount" value={thisEntry.amount}  onChange={this.handleChange.bind(this)} required/>
 				</span>
 				<button onClick={this.removeEntry.bind(this, key)}>Remove Entry</button>

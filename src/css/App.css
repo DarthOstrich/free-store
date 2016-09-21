@@ -63,15 +63,26 @@ button {
   width: 100%;
 }
 
-.form-row input {
-  width: 100%;
+input {
   border-radius: 2px;
   border: 1px solid #e0e0e0;
   padding: 5px;
   margin-bottom: 10px;
 }
 
+.form-row input {
+  width: 100%;
+}
+
 .required {
   color: red;
   font-size: .75em;
+}
+
+.entry-list-item li {
+  list-style: none;
+}
+
+.form-block input {
+  margin-right: 20px;
 }
