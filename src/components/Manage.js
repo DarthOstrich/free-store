@@ -6,7 +6,7 @@ import AddEntryForm from './AddEntryForm.js';
 // import Firebase stuff
 import Rebase from 're-base';
 var base = Rebase.createClass({
-  	  apiKey: "AIzaSyBdsPVoPIkaN_poNEGcEU71GiBupw049U4",
+  	  apiKey: "",
       authDomain: "not-quicken.firebaseapp.com",
       databaseURL: "https://not-quicken.firebaseio.com/",
       storageBucket: "not-quicken.appspot.com",
